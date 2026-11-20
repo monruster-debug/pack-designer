@@ -1,0 +1,11 @@
+@keyframes constructor-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.main{animation:constructor-enter .4s cubic-bezier(.2,.7,.3,1) both}
+.image-load-host{position:relative}
+.image-load-frame{display:block;width:100%;min-height:80px}
+.card-image-frame{height:100px;min-height:100px}
+.image-is-loading{opacity:0}
+.image-preloader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:inherit;background:var(--kit-field);color:var(--kit-muted);pointer-events:none;z-index:1}
+.image-preloader-spinner{width:24px;height:24px;border:2px solid var(--kit-secondary);border-top-color:var(--kit-white);border-radius:50%;animation:image-preloader-spin .8s linear infinite}
+.image-load-error{padding:10px;font-size:11px;line-height:1.5;text-align:center}
+@keyframes image-preloader-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.main,.image-preloader-spinner{animation:none}}

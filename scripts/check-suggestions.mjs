@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {createSuggestions} from '../suggestions.js';
+const listeners={},nodes=new Map(),storage=new Map();let failStorage=false,lastToast='';
+globalThis.localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>{if(failStorage)throw Error('quota');storage.set(k,v);}};
+globalThis.document={addEventListener:(event,fn)=>listeners[event]=fn,querySelector:selector=>{if(selector==='.suggestions-list')return null;if(!nodes.has(selector))nodes.set(selector,{textContent:'',innerHTML:''});return nodes.get(selector);}};
+const esc=x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const deps={heading:()=>'',field:(label,value,id)=>`<div><input id="field-${id}" value="${esc(value)}"></div>`,btn:()=>'',icon:()=>'',esc,toast:x=>lastToast=x,showModal:()=>{},decorateKitControls:()=>{}};
+let api=createSuggestions(deps);
+const input=(key,value)=>listeners.input({target:{id:'field-suggestion-'+key,value}});
+const submit=()=>listeners.submit({target:{id:'suggestion-form'},preventDefault(){}});
+input('title','     ');input('description','x'.repeat(30));submit();assert.equal(storage.size,0,'Whitespace title rejected');
+for(let i=0;i<3;i++){input('title','Идея номер '+i);input('description','Описание предложения для конструктора паков');submit();}
+const key='shelter42-suggestions-v1';let items=JSON.parse(storage.get(key));assert.equal(items.length,3);assert.match(api.page(),/disabled/,'Daily limit disables submission');
+input('title','Четвёртая идея');input('description','Ещё одно описание предложения для проверки лимита');submit();assert.equal(JSON.parse(storage.get(key)).length,3,'Fourth daily submission rejected');
+const click=dataset=>listeners.click({target:{closest:()=>({dataset})}});
+click({suggestionVote:items[0].id});assert.equal(JSON.parse(storage.get(key))[0].voted,true);
+click({suggestionVote:items[0].id});assert.equal(JSON.parse(storage.get(key))[0].voted,false,'Repeated click removes vote');
+failStorage=true;click({suggestionVote:items[0].id});assert.equal(JSON.parse(storage.get(key))[0].voted,false);assert.match(lastToast,/Не удалось сохранить/);failStorage=false;
+api=createSuggestions(deps);assert.match(api.page(),/Идея номер 0/,'Ideas survive reinitialization');
+listeners.input({target:{id:'suggestion-search',value:'неизвестная идея'}});assert.match(nodes.get('#suggestion-results').innerHTML,/Ничего не найдено/);
+storage.set(key,'not-json');assert.doesNotThrow(()=>createSuggestions(deps).page(),'Corrupt storage does not crash page');
+console.log('Suggestions: validation, daily limit, vote toggle, persistence, search, quota and corrupt storage passed.');

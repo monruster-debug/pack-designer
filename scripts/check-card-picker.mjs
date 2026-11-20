@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {availableLibraryCards,addLibraryCards} from '../card-picker-model.js';
+const card={id:'a',name:'Медицинский кабинет',description:'Помощь',relation:true,players_count:2,image:'image'};
+const packs=[{id:'p1',cards:{bunker:[card],health:[{id:'h',name:'Здоров'}]}},{id:'p2',cards:{bunker:[card,{id:'b',name:'Кухня'}]}}];
+const orphan={id:'o',type:'bunker',name:'Склад',packIds:[]};
+assert.equal(availableLibraryCards(packs,[orphan],'bunker').length,3);
+assert.equal(availableLibraryCards(packs,[],'bunker',{query:'МЕДИЦ'}).length,1);
+assert.equal(availableLibraryCards(packs,[],'bunker',{packId:'p1'}).length,1);
+assert.equal(availableLibraryCards(packs,[],'bunker',{query:'xxx'}).length,0);
+for(const type of ['special','disaster'])assert.deepEqual(availableLibraryCards(packs,[orphan],type),[]);
+const target={cards:{bunker:[]}},all=availableLibraryCards(packs,[orphan],'bunker');
+assert.equal(addLibraryCards(target,'bunker',all,new Set(['a','o','h'])),2);
+assert.equal(addLibraryCards(target,'bunker',all,new Set(['a','o'])),0);
+assert.equal(target.cards.bunker[0].players_count,2);
+assert.ok(!('packIds' in target.cards.bunker[0]));
+target.cards.bunker[0].name='Changed';assert.equal(card.name,'Медицинский кабинет');
+assert.equal(JSON.parse(JSON.stringify(target)).cards.bunker.length,2);
+console.log('Card picker: type isolation, pack/name filters, deduplication, orphan cards, metadata and source isolation passed.');

@@ -1,0 +1,175 @@
+{
+  "file": "n6yrFlsy8fBydxohCHki49",
+  "page": "2:2",
+  "iconsFile": "DRcKjc5JN39mCZsGteW6fj",
+  "iconsPage": "1:1668",
+  "exceptions": [
+    "Existing font sizes retained",
+    "Existing button min-heights and padding retained"
+  ],
+  "icons": {
+    "info": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/info.svg",
+      "url": "https://www.figma.com/api/mcp/asset/5ac48131-6e3e-4ae6-9009-252abca8a76b.svg"
+    },
+    "profession": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/profession.svg",
+      "url": "https://www.figma.com/api/mcp/asset/7c087a12-c163-4a4a-b252-d1ca6db09718.svg"
+    },
+    "biology": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/biology.svg",
+      "url": "https://www.figma.com/api/mcp/asset/84c9114a-399e-42f2-8422-50b2bb53f0e6.svg"
+    },
+    "health": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/health.svg",
+      "url": "https://www.figma.com/api/mcp/asset/61cfdfda-e36b-46fb-bb06-76296d219b2d.svg"
+    },
+    "hobby": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/hobby.svg",
+      "url": "https://www.figma.com/api/mcp/asset/f93c5702-c097-4f45-a1c4-d37823a35887.svg"
+    },
+    "fact": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/fact.svg",
+      "url": "https://www.figma.com/api/mcp/asset/d17cc122-4967-47dd-b7bc-61d1a07a6dba.svg"
+    },
+    "baggage": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/baggage.svg",
+      "url": "https://www.figma.com/api/mcp/asset/112c1856-b265-4226-849f-dbc782f48ef0.svg"
+    },
+    "special": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/special.svg",
+      "url": "https://www.figma.com/api/mcp/asset/45fcac57-c84e-4541-865f-617a2bfcd476.svg"
+    },
+    "review": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/review.svg",
+      "url": "https://www.figma.com/api/mcp/asset/efa4bcbb-7246-4040-890b-e5dd4957fcd3.svg"
+    },
+    "plus": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/plus.svg",
+      "url": "https://www.figma.com/api/mcp/asset/c620062f-3dcd-46a3-a24a-c7fb8f337b1e.svg"
+    },
+    "search": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/search.svg",
+      "url": "https://www.figma.com/api/mcp/asset/ed698c9d-c449-49a1-9a1e-2ab5c1b352f0.svg"
+    },
+    "lock": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/lock.svg",
+      "url": "https://www.figma.com/api/mcp/asset/ccfd7d61-62c4-4f11-8141-818cc0a049eb.svg"
+    },
+    "eye": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/eye.svg",
+      "url": "https://www.figma.com/api/mcp/asset/28f3268c-dd15-4915-be03-6f1f3603ae09.svg"
+    },
+    "cards": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/cards.svg",
+      "url": "https://www.figma.com/api/mcp/asset/b8684fe1-bb56-40fb-bc0a-21626c95dc74.svg"
+    },
+    "table": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/table.svg",
+      "url": "https://www.figma.com/api/mcp/asset/bc68c496-2ac9-47dc-8028-2d4c6dcaead7.svg"
+    },
+    "edit": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/edit.svg",
+      "url": "https://www.figma.com/api/mcp/asset/0e4b653e-f81d-46e3-ac34-d34217c08cd1.svg"
+    },
+    "right": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/right.svg",
+      "url": "https://www.figma.com/api/mcp/asset/e1651f73-c9b3-4da1-baf5-a5dc2897a083.svg"
+    },
+    "left": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/left.svg",
+      "url": "https://www.figma.com/api/mcp/asset/3bb7737b-383a-4593-86c0-0cec7795125e.svg"
+    },
+    "profile": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/profile.svg",
+      "url": "https://www.figma.com/api/mcp/asset/9147484b-76e2-4fdd-b6f9-d7f864ea19a1.svg"
+    },
+    "share": {
+      "file": "n6yrFlsy8fBydxohCHki49",
+      "asset": "assets/icons/share.svg",
+      "url": "https://www.figma.com/api/mcp/asset/59cd8957-7366-49d8-87d7-1325cc7a17e5.svg"
+    },
+    "bunker": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/bunker.svg",
+      "url": "https://www.figma.com/api/mcp/asset/0b764105-a641-4c1f-92f7-fac80738f461.svg"
+    },
+    "disaster": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/disaster.svg",
+      "url": "https://www.figma.com/api/mcp/asset/a118a12e-22f0-46ab-abf9-a2c06dd9e0de.svg"
+    },
+    "image": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/image.svg",
+      "url": "https://www.figma.com/api/mcp/asset/4959053e-07d7-49af-8b66-545cb456752b.svg"
+    },
+    "upload": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/upload.svg",
+      "url": "https://www.figma.com/api/mcp/asset/bd48fa8d-b3bd-48e3-8d91-ab89196c0f28.svg"
+    },
+    "list": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/list.svg",
+      "url": "https://www.figma.com/api/mcp/asset/2deae8fc-6ea0-43cf-9a74-87fcfa0c5d1a.svg"
+    },
+    "menu": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/menu.svg",
+      "url": "https://www.figma.com/api/mcp/asset/db049119-e2e8-40d4-9ea4-6b76040987a1.svg"
+    },
+    "trash": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "asset": "assets/icons/trash.svg",
+      "url": "https://www.figma.com/api/mcp/asset/fe73de57-35ec-42f8-b500-60fcf691a707.svg"
+    },
+    "archive": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "node": "398:1923",
+      "asset": "assets/icons/archive.svg"
+    },
+    "draft": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "node": "398:23308",
+      "asset": "assets/icons/draft.svg"
+    },
+    "logout": {
+      "file": "DRcKjc5JN39mCZsGteW6fj",
+      "node": "398:22247",
+      "asset": "assets/icons/logout.svg"
+    }
+  },
+  "cardAccents": {
+    "file": "n6yrFlsy8fBydxohCHki49",
+    "node": "2:1290",
+    "colors": {
+      "profession": "#588DFF",
+      "biology": "#13BA74",
+      "health": "#FF0000",
+      "hobby": "#FFF588",
+      "fact": "#9D88FF",
+      "baggage": "#FF88EF",
+      "special": "#FF3500"
+    }
+  }
+}

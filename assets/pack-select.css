@@ -1,0 +1,15 @@
+/* Shared with app/components/StatsPackSelect.vue; Small field Figma 353:2846. */
+.pack-select{position:relative;width:max-content;max-width:100%;font-family:inherit}
+.pack-trigger{display:flex;align-items:center;gap:8px;width:100%;height:40px;border:1px solid #2c2c2c;background:#1f1f1f;border-radius:6px;padding:0 14px;color:#fff;font-size:14px;font-weight:500;text-align:left;cursor:pointer}
+.pack-trigger>span:not(.iconify):not(.kit-icon){flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pack-trigger :is(.iconify,.kit-icon),.pack-options :is(.iconify,.kit-icon){flex-shrink:0;width:16px;height:16px}
+.pack-trigger .chevron{color:#bdbdbd;filter:brightness(0) invert(.7411764706)}
+.pack-trigger[aria-expanded=true]{border-color:#666}
+.pack-options{position:absolute;z-index:12;top:calc(100% + 6px);width:max-content;min-width:100%;max-width:calc(100vw - 32px);border:1px solid #404040;background:#1f1f1f;border-radius:6px;padding:4px;box-shadow:0 8px 24px #0006;color:#fff;font-family:inherit}
+.pack-options button{display:flex;align-items:center;gap:8px;padding:10px;width:100%;background:transparent;border:0;border-radius:4px;color:#fff;text-align:left;font:inherit;font-size:14px;cursor:pointer}
+.pack-options .active{background:#2c2c2c}
+.pack-options [aria-selected=true]{color:#ff3500}
+.pack-options .check{margin-left:auto;display:block;flex:0 0 16px;width:16px;height:16px;background:currentColor;mask:url('./icons/select-check.svg') center/contain no-repeat;-webkit-mask:url('./icons/select-check.svg') center/contain no-repeat}
+.pack-options--floating{position:fixed;inset:auto;margin:0;min-width:0;z-index:90;overflow:auto;scrollbar-width:thin}
+.pack-options--floating[popover]:not(:popover-open),.pack-options[hidden]{display:none}
+.admin-filters .pack-select{width:100%;min-width:0}
