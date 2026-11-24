@@ -604,4 +604,20 @@ html:has(#modal[open]),body:has(#modal[open]){overflow:hidden;overscroll-behavio
 .publication-card__footer strong { font-size: 14px; }
 .publication-card__footer .hint { margin: 6px 0 0; line-height: 1.5; }
 .publication-card__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.publication-card__actions > .btn {
+  min-height: 40px;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 4px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0;
+}
+.publication-card__actions > .btn:disabled {
+  background: var(--kit-disabled-bg);
+  color: var(--kit-secondary);
+  opacity: 1;
+}
 @media(max-width: 743px) { .publication-card__header { flex-wrap: wrap; padding: 16px; } .publication-card__status { margin-left: 0; } .publication-card__stats { grid-template-columns: 1fr; } .publication-card__stats > div { padding: 14px 16px; } .publication-card__stats > div + div { border-left: 0; border-top: 1px solid #2c2c2c; } .publication-card__footer { padding: 16px; } }

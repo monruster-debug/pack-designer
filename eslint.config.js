@@ -1,0 +1,26 @@
+export default [
+  { ignores: ['dist/**', '.qa/**'] },
+  {
+    files: ['**/*.{js,mjs,cjs}'],
+    rules: {
+      'constructor-super': 'error',
+      'for-direction': 'error',
+      'getter-return': 'error',
+      'no-async-promise-executor': 'error',
+      'no-compare-neg-zero': 'error',
+      'no-cond-assign': ['error', 'except-parens'],
+      'no-const-assign': 'error',
+      'no-dupe-args': 'error',
+      'no-dupe-class-members': 'error',
+      'no-dupe-keys': 'error',
+      'no-duplicate-case': 'error',
+      'no-func-assign': 'error',
+      'no-import-assign': 'error',
+      'no-promise-executor-return': 'error',
+      'no-unreachable': 'error',
+      'no-unsafe-finally': 'error',
+      'use-isnan': 'error',
+      'valid-typeof': 'error',
+    },
+  },
+];

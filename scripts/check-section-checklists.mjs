@@ -20,7 +20,7 @@ for(const id of ['profession','biology','health','hobby','fact','baggage','bunke
  const minimum=id==='bunker'?5:32;
  p.cards[id]=Array.from({length:3},()=>({name:'Имя',description:'Описание',image}));
  assert.equal(get(id)[1].detail,'3 / '+minimum);if(['fact','bunker'].includes(id))assert.equal(get(id)[2].detail,'3 / '+minimum);assert.equal(get(id)[1].valid,false);if(['fact','bunker'].includes(id))assert.equal(get(id)[2].valid,false);else assert.equal(get(id).length,2);
- if(id==='bunker'){assert.equal(get(id)[3].detail,'3 / 5 · до 3 МБ');assert.equal(get(id)[3].valid,false);}
+ if(id==='bunker'){assert.equal(get(id)[3].detail,'3 / 5 · до 1 МБ');assert.equal(get(id)[3].valid,false);}
  p.cards[id]=Array.from({length:minimum+1},()=>({name:'Имя',description:'Описание',image}));assert.equal(get(id)[1].detail,(minimum+1)+' / '+(minimum+1));p.cards[id][minimum].name='';assert.equal(get(id)[1].valid,false);
 }
 p.cards.disaster=p.cards.disaster.slice(1,2);assert.equal(get('disaster')[1].detail,'1 / 10');assert.equal(get('disaster')[3].detail,'4 / 40');assert.ok(get('disaster').every(c=>!c.valid));
