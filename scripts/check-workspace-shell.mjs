@@ -33,6 +33,9 @@ admin.context.section='admin-users';admin.context.render();
 assert.deepEqual(admin.calls,['cards','users']);
 assert.equal(admin.node('.header-caption').textContent,'Административная панель');
 const player=setup(false);player.context.render();
+player.context.section='statistics';player.context.render();
+assert.equal(player.context.section,'about','Unauthorized statistics state falls back to the pack editor');
+assert.match(player.node('#page').innerHTML,/Редактор пака/);
 assert.doesNotMatch(player.node('#navigation').innerHTML,/admin-users|admin-cards/);
 assert.equal(player.node('.header-caption').textContent,'Конструктор паков');
 for(const screen of ['catalog','about','admin-cards','admin-users']){
@@ -52,4 +55,16 @@ for(const [from,to] of [
  ['https://preview.example/workshop/','https://preview.example/lk']
 ])assert.equal(getAccountUrl({href:from}),to);
 assert.equal(getAccountUrl({href:'http://localhost:5174/'},'javascript:alert(1)'),'http://localhost:3000/lk');
+const workshop=source.slice(source.indexOf('function workshopNav(){'),source.indexOf('function nav(){'));
+for(const allowed of [false,true]){
+ const navigation={innerHTML:''};
+ vm.runInNewContext(workshop+';workshopNav()', {section:'about',superadminWorkspace:allowed,$:()=>navigation,icon:()=>'',esc:String,baseCats:[],pack:{customTypes:[]}});
+ assert.equal(navigation.innerHTML.includes('data-section="statistics"'),allowed);
+}
+const navigate=source.split('\n').find(line=>line.startsWith('function navigate(id){'));
+const denied={section:'about',superadminWorkspace:false};
+vm.runInNewContext(navigate+';navigate("statistics")',denied);
+assert.equal(denied.section,'about','Direct navigation cannot bypass the role check');
+const statistics=source.slice(source.indexOf('function statisticsPage(){'),source.indexOf('function statisticsChart('));
+assert.equal(vm.runInNewContext(statistics+';statisticsPage()', {superadminWorkspace:false}), '','Denied users do not render statistics or read pack metrics');
 console.log('Workspace: shared pack catalog/editor and admin sections, persistent navigation, player/admin headings passed.');
