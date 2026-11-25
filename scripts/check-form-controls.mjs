@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import { enhanceRequiredFields, initFieldValidation } from '../form-controls.js';
+
+const handlers={},attributes=new Map(),children=[];
+let error;
+const label={querySelector:()=>children.find(x=>x.className==='required-mark'),append:el=>children.push(el)};
+const field={querySelector:selector=>selector==='label'?label:error,append:el=>{error=el;}};
+const input={id:'required-name',validity:{valid:false},validationMessage:'Заполните поле.',closest:()=>field,setAttribute:(k,v)=>attributes.set(k,v),getAttribute:k=>attributes.get(k),removeAttribute:k=>attributes.delete(k)};
+globalThis.document={createElement:()=>({setAttribute(){},remove(){error=undefined;}})};
+const root={querySelectorAll:()=>[input],addEventListener:(name,fn)=>handlers[name]=fn};
+enhanceRequiredFields(root);enhanceRequiredFields(root);
+assert.equal(children.length,1,'Repeated renders do not duplicate required marks');
+assert.equal(attributes.get('aria-required'),'true');
+attributes.set('aria-describedby','name-hint');
+initFieldValidation(root);handlers.invalid({target:input});
+assert.equal(attributes.get('aria-invalid'),'true');
+assert.equal(error.textContent,'Заполните поле.');
+assert.equal(attributes.get('aria-describedby'),'name-hint required-name-error');
+handlers.input({target:input});assert.ok(error,'Invalid edits retain the explanation');
+input.validity.valid=true;handlers.input({target:input});
+assert.equal(error,undefined);assert.equal(attributes.get('aria-describedby'),'name-hint');
+assert.equal(attributes.has('aria-invalid'),false);
+console.log('Forms: required labels, idempotent marks, accessible errors and recovery passed.');

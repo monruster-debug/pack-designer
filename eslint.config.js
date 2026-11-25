@@ -1,8 +1,17 @@
+import js from '@eslint/js';
+import globals from 'globals';
+
 export default [
   { ignores: ['dist/**', '.qa/**'] },
+  js.configs.recommended,
+  { files: ['**/*.js'], languageOptions: { globals: globals.browser } },
+  { files: ['*.mjs', 'scripts/**/*.{js,mjs,cjs}', '*.config.js'], languageOptions: { globals: globals.node } },
+  { files: ['scripts/check-motion.mjs'], languageOptions: { globals: { document: 'readonly' } } },
   {
     files: ['**/*.{js,mjs,cjs}'],
     rules: {
+      'no-empty': ['error', { allowEmptyCatch: true }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_', ignoreRestSiblings: true }],
       'constructor-super': 'error',
       'for-direction': 'error',
       'getter-return': 'error',

@@ -621,3 +621,6 @@ html:has(#modal[open]),body:has(#modal[open]){overflow:hidden;overscroll-behavio
   opacity: 1;
 }
 @media(max-width: 743px) { .publication-card__header { flex-wrap: wrap; padding: 16px; } .publication-card__status { margin-left: 0; } .publication-card__stats { grid-template-columns: 1fr; } .publication-card__stats > div { padding: 14px 16px; } .publication-card__stats > div + div { border-left: 0; border-top: 1px solid #2c2c2c; } .publication-card__footer { padding: 16px; } }
+.field .required-mark{color:var(--kit-primary);font:inherit}
+.field .kit-field-control>:is(input,textarea,select)[aria-invalid="true"]{color:var(--kit-error)}
+.field .field-validation-error{color:var(--kit-error);font-size:12px;line-height:1.4;margin-top:4px}

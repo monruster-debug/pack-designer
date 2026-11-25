@@ -6,9 +6,11 @@ export function validateCardDraft(draft,types,packIds){
  if(!record.name||record.name.length>30)throw new Error('Укажите название карты до 30 символов.');
  if(!types.some(t=>t.id===record.type))throw new Error('Выберите вид карты.');
  if(!Number.isSafeInteger(Number(record.players_count))||Number(record.players_count)<0)throw new Error('Количество игроков должно быть целым неотрицательным числом.');
+ if(record.type==='bunker'&&record.relation&&Number(record.players_count)<1)throw new Error('Для взаимоотношений укажите количество игроков не меньше 1.');
  record.players_count=record.relation?Number(record.players_count):0;
  record.category_name=String(record.category_name||'').trim();record.typeName=record.category_name;
  record.description=String(record.description||'').trim();
+ if(!['profession','biology','health','hobby','baggage'].includes(record.type)&&!record.description)throw new Error('Укажите описание карты.');
  const descriptionLimit=record.type==='disaster'?1200:130;
  if(record.description.length>descriptionLimit)throw new Error('Описание карты должно быть не длиннее '+descriptionLimit+' символов.');
  record.packIds=[...new Set(record.packIds)].filter(id=>packIds.includes(id));

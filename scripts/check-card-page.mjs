@@ -34,10 +34,14 @@ assert.throws(()=>validateCardDraft({...draft,players_count:1.5},types,['p']),/�
 const moved=validateCardDraft({...draft,type:'profession',image:'data:image/png;base64,x',images:{start:{}},extraImages:['x']},types,['p']);
 assert.ok(!('image' in moved)&&!('images' in moved)&&!('extraImages' in moved));
 assert.equal(validateCardDraft({...draft,relation:false},types,['p']).players_count,0);
+assert.throws(()=>validateCardDraft({...draft,type:'bunker',relation:true,players_count:0},types,['p']),/не меньше 1/);
+assert.equal(validateCardDraft({...draft,type:'bunker',relation:true,players_count:1},types,['p']).players_count,1);
+assert.throws(()=>validateCardDraft({...draft,type:'disaster',description:'  '},types,['p']),/описание карты/);
+assert.equal(validateCardDraft({...draft,type:'profession',description:''},types,['p']).description,'');
 
 // Run the actual controller with DOM doubles to verify a deep link opens a page,
 // uses the existing form stages and saves once through the shared transaction.
-const nodes=new Map(),listeners={},captureClicks=[],storage=new Map();let committed,modalCalls=0;
+const nodes=new Map(),listeners={},captureClicks=[],storage=new Map();let committed,modalCalls=0,prepareImageImpl=async()=>{};
 function node(key){if(!nodes.has(key))nodes.set(key,{innerHTML:'',open:false,classList:{add(){},remove(){},toggle(){}},addEventListener(){},focus(){},close(){this.open=false;}});return nodes.get(key);}
 const context={...model,pageSize:model.ADMIN_PAGE_SIZE,makeCardDraft,validateCardDraft,cardEditorSections,URL,URLSearchParams,structuredClone,console,
  location:new URL('http://127.0.0.1:5174/?admin=cards#card/card-42'),
@@ -50,7 +54,7 @@ const source=fs.readFileSync('admin.js','utf8').replace(/^import .*?;\r?\n/gm,''
 vm.createContext(context);vm.runInContext(source+';globalThis.create=createAdminSections;',context);
 const controller=context.create({library:[{id:'p',name:'Пак',customTypes:[],cards:{profession:[original]}}],categories:types,
  heading:title=>'<h1>'+title+'</h1>',btn:(text,cls='',data='')=>'<button class="btn '+cls+'" '+data+'>'+text+'</button>',icon:()=>'',esc:value=>String(value??''),uid:()=> 'new-card',
- showModal:()=>modalCalls++,toast(){},decorateKitControls(){},onCounts(){},imageSpecs:[],rangeConfig:{},imageUrl:()=>'',prepareImage:async()=>{},prepareAudio:async file=>({assetId:'audio-test',name:file.name,bytes:file.size,mime:file.type}),commitCard:record=>committed=record});
+ showModal:()=>modalCalls++,toast(){},decorateKitControls(){},onCounts(){},imageSpecs:[],rangeConfig:{bunkerArea:{title:'Площадь бункера',presets:[[10,50]]}},imageUrl:()=>'',prepareImage:(...args)=>prepareImageImpl(...args),prepareAudio:async file=>({assetId:'audio-test',name:file.name,bytes:file.size,mime:file.type}),commitCard:record=>committed=record});
 controller.render('cards');
 const html=node('#page').innerHTML;
 assert.ok(html.includes('admin-card-form'));assert.ok(!html.includes('Краткое описание'));
@@ -70,8 +74,23 @@ for(const type of ['bunker','disaster','profession']){
  for(const handler of listeners.change)await handler({target:{value:type,dataset:{cardKey:'type'},closest:()=>({}),hasAttribute:()=>false}});
  const form=node('#page').innerHTML;
  assert.equal(form.includes('Использовать взаимоотношения'),type==='bunker');
+ if(type==='disaster')assert.equal((form.match(/<h3>Площадь бункера<\/h3>/g)||[]).length,1,'Bunker area range is shown once');
  assert.ok(form.includes('maxlength="'+(type==='disaster'?1200:130)+'"'));
 }
+// Resolve two image requests in reverse order: the latest selection must win.
+for(const handler of listeners.change)await handler({target:{value:'bunker',dataset:{cardKey:'type'},closest:()=>({}),hasAttribute:()=>false}});
+const uploads=[];prepareImageImpl=()=>new Promise(resolve=>{uploads.push(resolve);});
+const upload=()=>Promise.all(listeners.change.map(handler=>handler({target:{dataset:{cardFile:'main'},files:[{name:'image.png'}],closest:()=>({}),hasAttribute:()=>false}})));
+const firstUpload=upload(),secondUpload=upload();
+uploads[1]({src:'data:image/png;base64,new'});await secondUpload;
+uploads[0]({src:'data:image/png;base64,old'});await firstUpload;
+assert.ok(node('#page').innerHTML.includes('data:image/png;base64,new'));
+assert.ok(!node('#page').innerHTML.includes('data:image/png;base64,old'));
+// Removing an image also invalidates an in-flight replacement.
+const removedUpload=upload();
+for(const handler of listeners.click)handler({target:{closest:selector=>selector==='[data-card-page]'?{dataset:{cardPage:'remove-image',slot:'main'}}:null}});
+uploads[2]({src:'data:image/png;base64,removed'});await removedUpload;
+assert.ok(!node('#page').innerHTML.includes('data:image/png;base64,removed'));
 for(const handler of listeners.change)await handler({target:{value:'disaster',dataset:{cardKey:'type'},closest:()=>({}),hasAttribute:()=>false}});
 for(const handler of listeners.change)await handler({target:{dataset:{},closest:()=>({}),hasAttribute:name=>name==='data-card-audio',files:[{name:'Озвучка.mp3',type:'audio/mpeg',size:1024}]}});
 assert.ok(node('#page').innerHTML.includes('Озвучка.mp3'));

@@ -8,9 +8,11 @@
     "build": "npm run check && npm test && node scripts/build.mjs",
     "dev": "node server.mjs",
     "check": "node --check app.js",
-    "test": "node scripts/check-card-picker.mjs && node scripts/check-constructor-fields.mjs && node scripts/check-admin-clipboard.mjs && node scripts/check-workspace-shell.mjs && node scripts/check-admin.mjs && node scripts/check-database-import.mjs && node scripts/check-card-page.mjs && node scripts/check-tutorial.mjs && node scripts/check-http-ids.mjs && node scripts/check-disaster.mjs && node scripts/check-imported-images.mjs && node scripts/check-statistics.mjs && node scripts/check-suggestions.mjs && node scripts/check-motion.mjs && node scripts/check-section-checklists.mjs && node scripts/check-pack-workflow.mjs && node scripts/check-upload-states.mjs && node scripts/check-catalog-order.mjs && node scripts/check-workbook-packs.mjs"
+    "test": "node scripts/check-form-controls.mjs && node scripts/check-card-picker.mjs && node scripts/check-constructor-fields.mjs && node scripts/check-admin-clipboard.mjs && node scripts/check-workspace-shell.mjs && node scripts/check-admin.mjs && node scripts/check-database-import.mjs && node scripts/check-card-page.mjs && node scripts/check-tutorial.mjs && node scripts/check-http-ids.mjs && node scripts/check-disaster.mjs && node scripts/check-imported-images.mjs && node scripts/check-statistics.mjs && node scripts/check-suggestions.mjs && node scripts/check-motion.mjs && node scripts/check-section-checklists.mjs && node scripts/check-pack-workflow.mjs && node scripts/check-upload-states.mjs && node scripts/check-catalog-order.mjs && node scripts/check-workbook-packs.mjs"
   },
   "devDependencies": {
-    "eslint": "^10.15.0"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0"
   }
 }
